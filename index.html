@@ -1,39 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="css/style.css">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial--scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FinsAIght - Portfolio</title>
+    
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Particles.js Script -->
+    <script src="js/particles.min.js"></script>
 </head>
+
 <body>
+    <!-- Particles.js Background -->
+    <div id="particles-js"></div>
+    <script>
+        particlesJS.load('particles-js', 'js/particles-config.json', function() {
+            console.log('callback - particles.js config loaded');
+        });
+    </script>
+
+    <!-- Header -->
     <header>
         <h1>FinsAIght</h1>
     </header>
 
+    <!-- Hero Section -->
     <section id="hero">
-        </section>
+        <div class="hero-content">
+            <h1>Mohammad Mubin Jamil</h1>
+            <p>Finance and Data Intelligence Enthusiast | Aspiring Investment Banker</p>
+            <img src="images/profile-photo.jpg" alt="Mohammad Mubin Jamil" class="profile-photo">
+        </div>
+    </section>
 
+    <!-- About Section -->
     <section id="about">
-        </section>
+        <div class="about-content">
+            <h2>About Me</h2>
+            <p>
+                I am a recent graduate from Concordia University's John Molson School of Business, where I specialized in Finance and Data Intelligence. 
+                I believe we are at the brink of a technological revolution, much like the rise of the internet, and AI is at the forefront of this transformation. 
+                My passion lies in understanding how AI is reshaping industries, economies, and businesses—and using my knowledge to navigate this evolving landscape.
+            </p>
+            <p>
+                With a strong foundation in financial modeling, valuation, forecasting, and risk assessment, I have applied my skills in data analysis 
+                and automation using tools like Excel, Power BI, SAP, SQL, and VBA Macros. My experience at BRP strengthened my ability to manage large 
+                datasets, streamline reporting, and develop automation tools that enhanced efficiency by over 70%.
+            </p>
+            <p>
+                My long-term goal is to work in Investment Banking or M&A, gaining firsthand experience in how corporations rise, grow, mature, and pivot 
+                in a competitive market. As a side project, I am working on a DCF valuation tool that utilizes AI-powered OCR technology to extract financial 
+                data and calculate intrinsic value based on user-defined parameters. Additionally, I am developing an AI Market Trend Tracker, which analyzes 
+                the historical impact of AI across various industries—technology, healthcare, defense, agriculture, and education—to assess investment opportunities. 
+                These projects embody my curiosity, my drive to innovate, and my vision for the intersection of finance and technology.
+            </p>
+        </div>
+    </section>
 
+    <!-- Resume Section -->
     <section id="resume">
-        </section>
+        <h2>Resume</h2>
+        <p>Coming soon...</p>
+    </section>
 
+    <!-- Social Section -->
     <section id="social">
-        </section>
+        <h2>Connect with Me</h2>
+        <p>LinkedIn | GitHub | Twitter</p>
+    </section>
 
+    <!-- Projects Section -->
     <section id="projects">
-        </section>
+        <h2>Projects</h2>
+        <p>Coming soon...</p>
+    </section>
 
+    <!-- Footer -->
     <footer>
-        </footer
-  `
-  <section id="hero">
-    <div class="hero-content">
-        <h1>Mohammad Mubin Jamil</h1>
-        <p>Finance and Data Intelligence Enthusiast | Aspiring Investment Banker</p>
-        <img src="images/profile-photo.jpg" alt="Mohammad Mubin Jamil" class="profile-photo">
-    </div>
-</section>
+        <p>&copy; 2024 Mohammad Mubin Jamil | FinsAIght</p>
+    </footer>
+
+</body>
+</html>
