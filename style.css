@@ -114,3 +114,30 @@ footer {
     object-fit: cover;
     margin-top: 20px;
 }
+html {
+    scroll-behavior: smooth;
+}
+
+.section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 50px;
+}
+.parallax-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    background-size: cover;
+    z-index: -1;
+    transform: translateY(0);
+    transition: transform 0.2s ease-out;
+}
+
+.window-scrolled .parallax-bg {
+    transform: translateY(-20px);
+}
