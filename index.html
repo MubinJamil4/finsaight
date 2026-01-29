@@ -1,1 +1,134 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FinsAIght — FinTech Portfolio</title>
+
+  <!-- If your CSS is in /css/style.css use that line instead -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Top Nav -->
+  <nav class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="index.html">
+        <img src="images/logo.jpeg" alt="FinsAIght logo" class="brand-logo" />
+        <span class="brand-name">FinsAIght</span>
+      </a>
+
+      <div class="navlinks">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-noise"></div>
+
+    <div class="wrap hero-inner">
+      <div class="hero-card">
+        <p class="kicker">Luxury dark • FinTech • Consulting</p>
+        <h1>Build smarter finance decisions with AI-powered tools.</h1>
+        <p class="subhead">
+          Valuation models, dashboards, and research-grade analysis — designed for clarity, speed, and real-world use.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn primary" href="projects.html">View Projects</a>
+          <a class="btn ghost" href="about.html">About Me</a>
+          <a class="btn ghost" href="#contact">Contact</a>
+        </div>
+
+        <div class="badges">
+          <span class="badge">DCF Valuation</span>
+          <span class="badge">Market Research</span>
+          <span class="badge">Data Intelligence</span>
+          <span class="badge">Automation</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sections -->
+  <main>
+    <section class="section">
+      <div class="wrap grid-2">
+        <div class="panel">
+          <h2>What I’m building</h2>
+          <p class="muted">
+            Tools that blend financial rigor with modern data workflows — built to look clean and run fast.
+          </p>
+
+          <div class="mini-list">
+            <div class="mini-item">
+              <h3>DCF Valuation Tool</h3>
+              <p class="muted">Interactive intrinsic value model. Future: upload filings and auto-fill inputs.</p>
+            </div>
+            <div class="mini-item">
+              <h3>AI Industry Correlation Tracker</h3>
+              <p class="muted">Track AI-impact sectors with charts, correlations, and narrative insights.</p>
+            </div>
+          </div>
+
+          <div style="margin-top: 14px;">
+            <a class="link" href="projects.html">Explore the roadmap →</a>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>My focus</h2>
+          <p class="muted">
+            Finance + data intelligence with a consulting mindset: strong structure, clean visuals, and repeatable results.
+          </p>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-num">70%+</div>
+              <div class="stat-label">reporting efficiency gains (automation)</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">SQL</div>
+              <div class="stat-label">data extraction & analysis</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">Excel</div>
+              <div class="stat-label">modeling, forecasting, dashboards</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="wrap">
+        <div class="contact-card">
+          <div>
+            <h2>Let’s connect</h2>
+            <p class="muted">Want to collaborate, hire, or talk finance + AI? Reach me here:</p>
+          </div>
+
+          <div class="contact-actions">
+            <!-- Replace with your real email / LinkedIn -->
+            <a class="btn primary" href="mailto:your.email@example.com">Email Me</a>
+            <a class="btn ghost" href="https://www.linkedin.com/" target="_blank" rel="noopener">LinkedIn</a>
+          </div>
+        </div>
+
+        <p class="footer muted">© <span id="year"></span> FinsAIght. Built on GitHub Pages.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
