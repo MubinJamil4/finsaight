@@ -1,45 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me - FinsAIght</title>
-    
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — FinsAIght</title>
+
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <!-- Header -->
-    <header>
-        <h1>About Me</h1>
-        <a href="index.html" class="btn">Home</a>
-<a href="projects.html" class="btn">Projects</a>
-    </header>
+  <!-- Top Nav (same as homepage) -->
+  <nav class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="index.html">
+        <img src="images/logo.jpeg" alt="FinsAIght logo" class="brand-logo" />
+        <span class="brand-name">FinsAIght</span>
+      </a>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="about-content">
-            <h2>Mohammad Mubin Jamil</h2>
-            <p>Finance and Data Intelligence Enthusiast | Aspiring Investment Banker</p>
-            <img src="images/profile-photo.png" alt="Mohammad Mubin Jamil" class="profile-photo">
-            <p>
-                I am a recent graduate from Concordia University's John Molson School of Business, where I specialized in Finance and Data Intelligence. 
-                I believe we are at the brink of a technological revolution, much like the rise of the internet, and AI is at the forefront of this transformation. 
-                My passion lies in understanding how AI is reshaping industries, economies, and businesses—and using my knowledge to navigate this evolving landscape.
-            </p>
-            <p>
-                With a strong foundation in financial modeling, valuation, forecasting, and risk assessment, I have applied my skills in data analysis 
-                and automation using tools like Excel, Power BI, SAP, SQL, and VBA Macros. My experience at BRP strengthened my ability to manage large 
-                datasets, streamline reporting, and develop automation tools that enhanced efficiency by over 70%.
-            </p>
-            <a href="resume/Mubin_Jamil_CV_Finance_Analyst.pdf"
-   target="_blank"
-   rel="noopener"
-   class="btn">
-   View Resume (PDF)
-</a>
+      <div class="navlinks">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="projects.html">Projects</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main style="padding-top: 84px;">
+    <section class="section about-hero">
+      <div class="wrap about-grid">
+        <!-- Left: text -->
+        <div class="about-card">
+          <p class="kicker">About</p>
+          <h1 class="about-title">Mohammad Mubin Jamil</h1>
+          <p class="about-role">Finance & Data Intelligence • Aspiring Investment Banker</p>
+
+          <p class="muted" style="margin-top: 14px;">
+            I’m a finance + data intelligence graduate from Concordia (John Molson), focused on building practical tools
+            that connect financial rigor with AI-enabled workflows.
+          </p>
+
+          <p class="muted">
+            I’ve worked hands-on with financial modeling, reporting automation, and data analysis using Excel, Power BI,
+            SQL, SAP, and VBA — with a strong consulting mindset: structured thinking, clean deliverables, and speed.
+          </p>
+
+          <div class="about-actions">
+            <a class="btn primary" href="resume/Mubin_Jamil_CV_Finance_Analyst.pdf" target="_blank" rel="noopener">View Resume</a>
+            <a class="btn ghost" href="projects.html">View Projects</a>
+          </div>
+
+          <div class="badges" style="margin-top: 16px;">
+            <span class="badge">Valuation</span>
+            <span class="badge">Forecasting</span>
+            <span class="badge">Automation</span>
+            <span class="badge">Dashboards</span>
+          </div>
         </div>
+
+        <!-- Right: photo -->
+        <div class="photo-card">
+          <img src="images/profile-photo.png" alt="Mohammad Mubin Jamil" class="about-photo" />
+          <div class="photo-caption">
+            <div class="caption-title">Montréal, Canada</div>
+            <div class="caption-sub muted">Finance • Data • AI</div>
+          </div>
+        </div>
+      </div>
     </section>
+  </main>
 </body>
 </html>
