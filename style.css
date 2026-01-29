@@ -1,18 +1,24 @@
-/* ========= Luxury Dark FinTech Theme ========= */
+/* ========= FinsAIght — Luxury Dark (FinTech / Consulting) ========= */
+
 :root{
   --bg: #070A12;
+
   --panel: rgba(255,255,255,0.06);
   --panel2: rgba(255,255,255,0.04);
   --border: rgba(255,255,255,0.10);
+
   --text: rgba(255,255,255,0.92);
   --muted: rgba(255,255,255,0.72);
+
   --gold: #D7B46A;
   --blue: #2F63FF;
+
   --shadow: 0 18px 70px rgba(0,0,0,0.55);
 }
 
 *{ box-sizing:border-box; }
 html,body{ margin:0; padding:0; }
+
 body{
   font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
   background: var(--bg);
@@ -20,13 +26,15 @@ body{
   line-height: 1.55;
 }
 
-/* layout */
+a{ color: inherit; }
+
+/* ========== Layout ========== */
 .wrap{
   width: min(1120px, calc(100% - 40px));
   margin: 0 auto;
 }
 
-/* topbar */
+/* ========== Topbar ========== */
 .topbar{
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -35,6 +43,7 @@ body{
   backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
+
 .topbar-inner{
   display:flex;
   align-items:center;
@@ -42,6 +51,7 @@ body{
   padding: 14px 0;
   gap: 18px;
 }
+
 .brand{
   display:flex;
   align-items:center;
@@ -49,6 +59,7 @@ body{
   text-decoration: none;
   color: inherit;
 }
+
 .brand-logo{
   height: 34px;
   width: 34px;
@@ -56,32 +67,37 @@ body{
   object-fit: cover;
   border: 1px solid rgba(255,255,255,0.12);
 }
+
 .brand-name{
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: 0.3px;
 }
+
 .navlinks{
   display:flex;
   gap: 18px;
   font-weight: 650;
 }
+
 .navlinks a{
   color: var(--muted);
   text-decoration:none;
   padding: 8px 10px;
   border-radius: 10px;
 }
+
 .navlinks a:hover{
   color: var(--text);
   background: rgba(255,255,255,0.06);
 }
+
 .navlinks a.active{
   color: var(--text);
   border: 1px solid rgba(215,180,106,0.28);
   background: rgba(215,180,106,0.10);
 }
 
-/* hero */
+/* ========== Hero ========== */
 .hero{
   min-height: 100vh;
   padding-top: 84px; /* space for nav */
@@ -91,7 +107,7 @@ body{
   overflow:hidden;
 }
 
-/* Premium background (NO image needed) */
+/* Premium background (no image) */
 .hero-bg{
   position:absolute; inset:0;
   background:
@@ -135,7 +151,7 @@ body{
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 900;
 }
 
 .hero-card h1{
@@ -151,7 +167,7 @@ body{
   font-size: clamp(15px, 1.8vw, 18px);
 }
 
-/* buttons */
+/* ========== Buttons ========== */
 .btn{
   display:inline-flex;
   align-items:center;
@@ -161,19 +177,37 @@ body{
   border-radius: 14px;
   border: 1px solid rgba(255,255,255,0.14);
   text-decoration:none;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: 0.2px;
   color: inherit;
+  transition: transform 0.15s ease, opacity 0.15s ease, background 0.15s ease, border-color 0.15s ease;
 }
+
 .btn.primary{
   background: linear-gradient(135deg, rgba(47,99,255,0.95), rgba(47,99,255,0.65));
 }
-.btn.primary:hover{ opacity: 0.95; transform: translateY(-1px); }
+
+.btn.primary:hover{
+  opacity: 0.96;
+  transform: translateY(-1px);
+}
+
+/* gold hover accent (still classy) */
+.btn.primary:focus,
+.btn.primary:hover{
+  box-shadow: 0 14px 40px rgba(47,99,255,0.22);
+}
+
 .btn.ghost{
   background: rgba(255,255,255,0.06);
 }
-.btn.ghost:hover{ background: rgba(255,255,255,0.09); }
 
+.btn.ghost:hover{
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(215,180,106,0.22);
+}
+
+/* ========== Badges / chips ========== */
 .cta-row{
   display:flex;
   gap: 12px;
@@ -186,73 +220,91 @@ body{
   flex-wrap:wrap;
   gap: 10px;
 }
+
 .badge{
   padding: 8px 10px;
   border-radius: 999px;
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.10);
   color: rgba(255,255,255,0.82);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 13px;
 }
 
-/* sections */
-.section{
-  padding: 64px 0;
-}
+/* ========== Sections / Panels ========== */
+.section{ padding: 64px 0; }
+
 .grid-2{
   display:grid;
   grid-template-columns: 1fr 1fr;
   gap: 18px;
 }
+
 .panel{
   background: var(--panel2);
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 22px;
 }
+
 .panel h2{
   margin: 0 0 10px;
   letter-spacing: -0.2px;
 }
+
 .muted{ color: var(--muted); }
 
-.mini-list{ display:flex; flex-direction:column; gap: 14px; margin-top: 16px; }
+.mini-list{
+  display:flex;
+  flex-direction:column;
+  gap: 14px;
+  margin-top: 16px;
+}
+
 .mini-item{
   padding: 14px;
   border-radius: 16px;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.10);
 }
+
 .mini-item h3{ margin: 0 0 6px; }
 
 .link{
   color: rgba(215,180,106,0.92);
-  font-weight: 800;
+  font-weight: 900;
   text-decoration:none;
 }
-.link:hover{ text-decoration: underline; text-underline-offset: 6px; }
 
+.link:hover{
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+/* ========== Stats ========== */
 .stats{
   display:grid;
   grid-template-columns: 1fr;
   gap: 12px;
   margin-top: 16px;
 }
+
 .stat{
   padding: 14px;
   border-radius: 16px;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(255,255,255,0.10);
 }
+
 .stat-num{
   font-size: 26px;
-  font-weight: 900;
+  font-weight: 950;
   letter-spacing: -0.3px;
 }
+
 .stat-label{ color: var(--muted); }
 
-/* contact */
+/* ========== Contact ========== */
 .contact-card{
   display:flex;
   align-items:center;
@@ -263,6 +315,7 @@ body{
   border-radius: 20px;
   padding: 22px;
 }
+
 .contact-actions{
   display:flex;
   gap: 12px;
@@ -276,20 +329,142 @@ body{
   opacity: 0.85;
 }
 
-/* responsive */
-@media (max-width: 860px){
-  .grid-2{ grid-template-columns: 1fr; }
-  .brand-name{ display:none; }
-  .contact-card{ flex-direction:column; align-items:flex-start; }
+/* ========== ABOUT PAGE (left text, right photo) ========== */
+.about-hero{
+  position: relative;
 }
 
-/* Compatibility for existing about.html */
+.about-hero::before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(700px 420px at 15% 35%, rgba(47,99,255,0.18), transparent 60%),
+    radial-gradient(700px 420px at 85% 45%, rgba(215,180,106,0.14), transparent 60%);
+  pointer-events:none;
+}
+
+.about-grid{
+  position: relative;
+  z-index: 1;
+  display:grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+/* Left card (text) */
+.about-card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+  border: 1px solid rgba(215,180,106,0.18); /* gold accent */
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.about-title{
+  margin: 6px 0 6px;
+  font-size: clamp(30px, 4vw, 44px);
+  letter-spacing: -0.6px;
+  line-height: 1.1;
+}
+
+.about-role{
+  margin: 0;
+  color: rgba(255,255,255,0.80);
+  font-weight: 800;
+}
+
+.about-actions{
+  display:flex;
+  gap: 12px;
+  flex-wrap:wrap;
+  margin-top: 18px;
+}
+
+/* Right card (photo) */
+.photo-card{
+  position: relative;
+  border-radius: 22px;
+  overflow: hidden;
+
+  border: 1px solid rgba(215,180,106,0.35); /* gold edge */
+  background: rgba(255,255,255,0.04);
+  box-shadow: var(--shadow);
+}
+
+/* gold glow frame */
+.photo-card::before{
+  content:"";
+  position:absolute;
+  inset: 0;
+  pointer-events:none;
+  box-shadow:
+    inset 0 0 0 1px rgba(215,180,106,0.35),
+    0 0 0 1px rgba(215,180,106,0.08),
+    0 18px 80px rgba(215,180,106,0.10);
+  border-radius: 22px;
+  z-index: 3;
+}
+
+.about-photo{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display:block;
+
+  /* slightly B&W + premium */
+  filter: grayscale(0.55) contrast(1.08) brightness(1.02) saturate(0.85);
+}
+
+/* bottom gradient overlay for caption */
+.photo-card::after{
+  content:"";
+  position:absolute; left:0; right:0; bottom:0;
+  height: 45%;
+  background: linear-gradient(180deg, transparent, rgba(7,10,18,0.92));
+}
+
+.photo-caption{
+  position:absolute;
+  left: 16px;
+  right: 16px;
+  bottom: 14px;
+  z-index: 4;
+  display:flex;
+  flex-direction:column;
+  gap: 2px;
+}
+
+.caption-title{
+  font-weight: 950;
+  letter-spacing: 0.2px;
+}
+
+.caption-sub{
+  font-size: 14px;
+}
+
+/* ========== Compatibility (if any old about markup still exists) ========== */
 #about { padding: 64px 0; }
 .about-content { width: min(860px, calc(100% - 40px)); margin: 0 auto; }
+
 .profile-photo{
   width: 180px; height: 180px;
   border-radius: 50%;
   object-fit: cover;
   border: 1px solid rgba(255,255,255,0.12);
   box-shadow: 0 18px 60px rgba(0,0,0,0.35);
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 900px){
+  .grid-2{ grid-template-columns: 1fr; }
+  .about-grid{ grid-template-columns: 1fr; }
+  .photo-card{ min-height: 320px; }
+}
+
+@media (max-width: 860px){
+  .brand-name{ display:none; }
+  .contact-card{ flex-direction:column; align-items:flex-start; }
 }
