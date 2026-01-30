@@ -14,7 +14,8 @@
     <a href="index.html" class="active">Home</a>
     <a href="about.html">About</a>
     <a href="projects.html">Projects</a>
-    <a href="#contact">Contact</a>
+    <!-- Smooth scroll without changing URL -->
+    <a href="#" data-scroll="contact">Contact</a>
   </nav>
 
   <!-- HERO (this is the first page) -->
@@ -38,7 +39,8 @@
       <div class="cta-row">
         <a class="btn primary" href="projects.html">View Projects</a>
         <a class="btn ghost" href="about.html">About Me</a>
-        <a class="btn ghost" href="#contact">Contact</a>
+        <!-- Smooth scroll without changing URL -->
+        <a class="btn ghost" href="#" data-scroll="contact">Contact</a>
       </div>
 
       <div class="badges">
@@ -109,22 +111,21 @@
           </div>
 
           <div class="contact-actions">
-           <a
-  class="btn primary"
-  href="mailto:mubinjamil4@gmail.com?subject=Collaboration%20Inquiry"
->
-  Email Me
-</a>
+            <a
+              class="btn primary"
+              href="mailto:mubinjamil4@gmail.com?subject=Collaboration%20Inquiry"
+            >
+              Email Me
+            </a>
 
-        <a
-  class="btn ghost"
-  href="https://www.linkedin.com/in/mohammadmubinjamil/"
-  target="_blank"
-  rel="noopener"
->
-  LinkedIn
-</a>
-
+            <a
+              class="btn ghost"
+              href="https://www.linkedin.com/in/mubinjamil/"
+              target="_blank"
+              rel="noopener"
+            >
+              LinkedIn
+            </a>
           </div>
         </div>
 
@@ -134,6 +135,25 @@
   </main>
 
   <script>
+    // Always load page at the top (prevents opening at the bottom)
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+
+    // Smooth scroll without changing URL (#contact not added)
+    document.querySelectorAll('[data-scroll]').forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute("data-scroll");
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    });
+
+    // Footer year
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
