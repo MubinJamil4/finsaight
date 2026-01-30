@@ -1,0 +1,701 @@
+<link rel="stylesheet" href="style.css" />
+<body class="home">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DCF Valuation Tool — FinsAIght</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Small page-specific helpers (keeps your theme consistent) */
+    .page-head {
+      padding-top: 140px;
+      padding-bottom: 26px;
+      position: relative;
+      z-index: 2;
+    }
+    .page-title {
+      margin: 0 0 10px;
+      font-size: clamp(34px, 4.5vw, 54px);
+      letter-spacing: -0.7px;
+      line-height: 1.05;
+      color: rgba(255,255,255,0.96);
+      text-shadow: 0 18px 70px rgba(0,0,0,0.55);
+    }
+    .page-sub {
+      margin: 0;
+      max-width: 880px;
+      color: rgba(255,255,255,0.78);
+      text-shadow: 0 12px 50px rgba(0,0,0,0.55);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .field label {
+      font-weight: 850;
+      font-size: 13px;
+      color: rgba(255,255,255,0.86);
+    }
+    .field small {
+      color: rgba(255,255,255,0.66);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .field input {
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.92);
+      outline: none;
+    }
+    .field input:focus {
+      border-color: rgba(215,180,106,0.35);
+      box-shadow: 0 0 0 3px rgba(215,180,106,0.10);
+    }
+
+    .actions-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .notice {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.82);
+      font-size: 13px;
+    }
+    .notice.warn {
+      border-color: rgba(215,180,106,0.35);
+      background: rgba(215,180,106,0.08);
+    }
+
+    .table-wrap {
+      overflow: auto;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.04);
+      margin-top: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 520px;
+    }
+    th, td {
+      padding: 10px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      text-align: right;
+      font-size: 13px;
+      color: rgba(255,255,255,0.86);
+      white-space: nowrap;
+    }
+    th {
+      text-align: right;
+      font-weight: 900;
+      color: rgba(255,255,255,0.90);
+      background: rgba(255,255,255,0.03);
+    }
+    th:first-child, td:first-child { text-align: left; }
+    tr:last-child td { border-bottom: none; }
+
+    .muted-line {
+      color: rgba(255,255,255,0.70);
+      font-size: 13px;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 900px){
+      .form-grid { grid-template-columns: 1fr; }
+      table { min-width: 0; }
+    }
+  </style>
+</head>
+
+<body class="home">
+  <!-- Same cinematic background as home -->
+  <div class="hero-bg hero-bg-cinematic" style="position:fixed; inset:0; z-index:0;"></div>
+  <div class="hero-noise" style="position:fixed; inset:0; z-index:0;"></div>
+
+  <!-- Minimal nav -->
+  <nav class="nav-min">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="projects.html" class="active">Projects</a>
+    <a href="projects.html">Back</a>
+  </nav>
+
+  <main style="position:relative; z-index:2;">
+    <section class="section page-head">
+      <div class="wrap">
+        <p class="kicker">Finance • Valuation</p>
+        <h1 class="page-title">DCF Valuation Tool</h1>
+        <p class="page-sub">
+          A clean, recruiter-ready DCF model: forecast unlevered free cash flows (FCFF), discount with WACC,
+          compute terminal value (Gordon Growth), and estimate intrinsic value per share. Your inputs auto-save locally.
+        </p>
+
+        <div class="badges" style="margin-top:14px;">
+          <span class="badge">FCFF</span>
+          <span class="badge">WACC Discounting</span>
+          <span class="badge">Terminal Value</span>
+          <span class="badge">Sensitivity</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 0;">
+      <div class="wrap grid-2">
+        <!-- INPUTS -->
+        <div class="panel">
+          <h2>Inputs</h2>
+          <p class="muted">
+            Enter Year 0 values and assumptions. Percent fields accept either <strong>8</strong> or <strong>0.08</strong> (we normalize).
+          </p>
+
+          <div class="form-grid" id="inputs">
+            <div class="field">
+              <label for="rev0">Revenue (Year 0)</label>
+              <input id="rev0" type="number" step="any" inputmode="decimal" placeholder="e.g., 1000000000" />
+              <small>Use full currency units (e.g., 1,000,000,000).</small>
+            </div>
+
+            <div class="field">
+              <label for="growth">Revenue Growth (Years 1–5)</label>
+              <input id="growth" type="number" step="any" inputmode="decimal" placeholder="e.g., 8 (for 8%)" />
+              <small>Single growth rate applied each year (MVP).</small>
+            </div>
+
+            <div class="field">
+              <label for="ebitMargin">EBIT Margin</label>
+              <input id="ebitMargin" type="number" step="any" inputmode="decimal" placeholder="e.g., 18" />
+              <small>Operating margin (EBIT / Revenue).</small>
+            </div>
+
+            <div class="field">
+              <label for="taxRate">Tax Rate</label>
+              <input id="taxRate" type="number" step="any" inputmode="decimal" placeholder="e.g., 25" />
+              <small>Used to compute NOPAT = EBIT × (1 − tax).</small>
+            </div>
+
+            <div class="field">
+              <label for="daPct">D&amp;A (% of Revenue)</label>
+              <input id="daPct" type="number" step="any" inputmode="decimal" placeholder="e.g., 3" />
+              <small>Non-cash add-back to get FCFF.</small>
+            </div>
+
+            <div class="field">
+              <label for="capexPct">Capex (% of Revenue)</label>
+              <input id="capexPct" type="number" step="any" inputmode="decimal" placeholder="e.g., 4" />
+              <small>Investment outflow (subtracted).</small>
+            </div>
+
+            <div class="field">
+              <label for="nwcPct">ΔNWC (% of Revenue)</label>
+              <input id="nwcPct" type="number" step="any" inputmode="decimal" placeholder="e.g., 1" />
+              <small>Simple proxy for working capital investment (subtracted).</small>
+            </div>
+
+            <div class="field">
+              <label for="wacc">WACC (Discount Rate)</label>
+              <input id="wacc" type="number" step="any" inputmode="decimal" placeholder="e.g., 9" />
+              <small>Must be greater than terminal growth rate.</small>
+            </div>
+
+            <div class="field">
+              <label for="tg">Terminal Growth (g)</label>
+              <input id="tg" type="number" step="any" inputmode="decimal" placeholder="e.g., 3" />
+              <small>Long-run growth rate after Year 5.</small>
+            </div>
+
+            <div class="field">
+              <label for="netDebt">Net Debt</label>
+              <input id="netDebt" type="number" step="any" inputmode="decimal" placeholder="e.g., 2000000000" />
+              <small>Equity value = EV − Net Debt. (Use negative if net cash.)</small>
+            </div>
+
+            <div class="field">
+              <label for="shares">Shares Outstanding</label>
+              <input id="shares" type="number" step="any" inputmode="decimal" placeholder="e.g., 16000000000" />
+              <small>Used for intrinsic value per share.</small>
+            </div>
+
+            <div class="field">
+              <label for="years">Forecast Years</label>
+              <input id="years" type="number" step="1" min="3" max="10" inputmode="numeric" placeholder="5" />
+              <small>MVP default is 5 years. Keep 5 for now.</small>
+            </div>
+          </div>
+
+          <div class="actions-row">
+            <a href="#" class="btn primary" id="btnSample">Load Sample</a>
+            <a href="#" class="btn ghost" id="btnReset">Reset</a>
+            <a href="#" class="btn ghost" id="btnClear">Clear Saved</a>
+          </div>
+
+          <div id="warning" class="notice warn" style="display:none;"></div>
+          <div class="notice" style="margin-top: 12px;">
+            <strong>Note:</strong> This is an educational MVP model. Next upgrades: multi-stage growth, explicit NWC from balance sheet items,
+            and filing-assisted auto-fill.
+          </div>
+        </div>
+
+        <!-- OUTPUTS -->
+        <div class="panel">
+          <h2>Results</h2>
+          <p class="muted">Updates instantly as you change inputs.</p>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="stat-num" id="outPrice">—</div>
+              <div class="stat-label">intrinsic value per share</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num" id="outEquity">—</div>
+              <div class="stat-label">equity value</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num" id="outEV">—</div>
+              <div class="stat-label">enterprise value</div>
+            </div>
+          </div>
+
+          <div class="muted-line" id="assumptionLine">—</div>
+
+          <h3 style="margin:16px 0 6px;">Forecast (FCFF)</h3>
+          <div class="table-wrap">
+            <table id="forecastTable">
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>Revenue</th>
+                  <th>EBIT</th>
+                  <th>NOPAT</th>
+                  <th>D&amp;A</th>
+                  <th>Capex</th>
+                  <th>ΔNWC</th>
+                  <th>FCFF</th>
+                  <th>PV(FCFF)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td colspan="9" style="text-align:center; color: rgba(255,255,255,0.70);">Enter inputs to calculate.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 style="margin:16px 0 6px;">Sensitivity (Value / Share)</h3>
+          <p class="muted" style="margin-top:0;">
+            3×3 grid around your WACC and terminal growth.
+          </p>
+          <div class="table-wrap">
+            <table id="sensTable">
+              <thead>
+                <tr>
+                  <th>WACC \ g</th>
+                  <th id="g0">—</th>
+                  <th id="g1">—</th>
+                  <th id="g2">—</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id="w0">—</td>
+                  <td id="s00">—</td>
+                  <td id="s01">—</td>
+                  <td id="s02">—</td>
+                </tr>
+                <tr>
+                  <td id="w1">—</td>
+                  <td id="s10">—</td>
+                  <td id="s11">—</td>
+                  <td id="s12">—</td>
+                </tr>
+                <tr>
+                  <td id="w2">—</td>
+                  <td id="s20">—</td>
+                  <td id="s21">—</td>
+                  <td id="s22">—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p class="footer muted" style="margin-top:16px;">
+            © <span id="year"></span> FinsAIght. Built on GitHub Pages.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // ===== Helpers =====
+    const $ = (id) => document.getElementById(id);
+
+    const STORAGE_KEY = "finsaight_dcf_inputs_v1";
+
+    function toPct(x) {
+      // Accept "8" as 8% or "0.08" as 8%
+      const n = Number(x);
+      if (!isFinite(n)) return NaN;
+      return n > 1 ? n / 100 : n;
+    }
+
+    function fmtMoney(n) {
+      if (!isFinite(n)) return "—";
+      const abs = Math.abs(n);
+      const sign = n < 0 ? "-" : "";
+      // compact-ish formatting
+      if (abs >= 1e12) return sign + (abs / 1e12).toFixed(2) + "T";
+      if (abs >= 1e9)  return sign + (abs / 1e9).toFixed(2) + "B";
+      if (abs >= 1e6)  return sign + (abs / 1e6).toFixed(2) + "M";
+      if (abs >= 1e3)  return sign + (abs / 1e3).toFixed(2) + "K";
+      return sign + abs.toFixed(2);
+    }
+
+    function fmtNum(n) {
+      if (!isFinite(n)) return "—";
+      return n.toLocaleString(undefined, { maximumFractionDigits: 2 });
+    }
+
+    function fmtPct(n) {
+      if (!isFinite(n)) return "—";
+      return (n * 100).toFixed(2) + "%";
+    }
+
+    function showWarning(msg) {
+      const box = $("warning");
+      if (!msg) {
+        box.style.display = "none";
+        box.textContent = "";
+        return;
+      }
+      box.style.display = "block";
+      box.textContent = msg;
+    }
+
+    // ===== DCF Engine =====
+    function computeDCF(inputs) {
+      const years = Math.max(3, Math.min(10, Math.round(inputs.years || 5)));
+
+      const rev0 = inputs.rev0;
+      const g = inputs.growth;
+      const ebitM = inputs.ebitMargin;
+      const tax = inputs.taxRate;
+      const da = inputs.daPct;
+      const capex = inputs.capexPct;
+      const nwc = inputs.nwcPct;
+      const wacc = inputs.wacc;
+      const tg = inputs.tg;
+      const netDebt = inputs.netDebt;
+      const shares = inputs.shares;
+
+      // Validate
+      const req = [rev0, g, ebitM, tax, da, capex, nwc, wacc, tg, netDebt, shares];
+      if (req.some(v => !isFinite(v))) {
+        return { ok:false, error:"Please fill in all fields with valid numbers." };
+      }
+      if (rev0 <= 0) return { ok:false, error:"Revenue (Year 0) must be > 0." };
+      if (shares <= 0) return { ok:false, error:"Shares outstanding must be > 0." };
+      if (wacc <= tg) return { ok:false, error:"WACC must be greater than terminal growth (g)." };
+      if (wacc <= 0) return { ok:false, error:"WACC must be > 0." };
+      if (years < 3 || years > 10) return { ok:false, error:"Forecast years must be between 3 and 10." };
+
+      const rows = [];
+      let rev = rev0;
+
+      let pvSum = 0;
+      for (let t = 1; t <= years; t++) {
+        rev = rev * (1 + g);
+
+        const ebit = rev * ebitM;
+        const nopat = ebit * (1 - tax);
+        const daVal = rev * da;
+        const capexVal = rev * capex;
+        const nwcVal = rev * nwc;
+
+        const fcff = nopat + daVal - capexVal - nwcVal;
+
+        const disc = Math.pow(1 + wacc, t);
+        const pv = fcff / disc;
+
+        pvSum += pv;
+
+        rows.push({
+          year: t,
+          rev, ebit, nopat, daVal, capexVal, nwcVal, fcff, pv
+        });
+      }
+
+      // Terminal Value (Gordon Growth) based on final year's FCFF
+      const fcffN = rows[rows.length - 1].fcff;
+      const tv = (fcffN * (1 + tg)) / (wacc - tg);
+      const pvTV = tv / Math.pow(1 + wacc, years);
+
+      const ev = pvSum + pvTV;
+      const equity = ev - netDebt;
+      const price = equity / shares;
+
+      return {
+        ok: true,
+        years,
+        rows,
+        pvSum,
+        tv,
+        pvTV,
+        ev,
+        equity,
+        price
+      };
+    }
+
+    // ===== UI Binding =====
+    const inputIds = [
+      "rev0","growth","ebitMargin","taxRate","daPct","capexPct","nwcPct","wacc","tg","netDebt","shares","years"
+    ];
+
+    function readInputs() {
+      // Normalize percent fields
+      const rev0 = Number($("rev0").value);
+      const growth = toPct($("growth").value);
+      const ebitMargin = toPct($("ebitMargin").value);
+      const taxRate = toPct($("taxRate").value);
+      const daPct = toPct($("daPct").value);
+      const capexPct = toPct($("capexPct").value);
+      const nwcPct = toPct($("nwcPct").value);
+      const wacc = toPct($("wacc").value);
+      const tg = toPct($("tg").value);
+      const netDebt = Number($("netDebt").value);
+      const shares = Number($("shares").value);
+      const years = Number($("years").value || 5);
+
+      return { rev0, growth, ebitMargin, taxRate, daPct, capexPct, nwcPct, wacc, tg, netDebt, shares, years };
+    }
+
+    function writeInputs(obj) {
+      $("rev0").value = isFinite(obj.rev0) ? obj.rev0 : "";
+      $("growth").value = isFinite(obj.growth) ? (obj.growth * 100).toFixed(2).replace(/\.00$/, "") : "";
+      $("ebitMargin").value = isFinite(obj.ebitMargin) ? (obj.ebitMargin * 100).toFixed(2).replace(/\.00$/, "") : "";
+      $("taxRate").value = isFinite(obj.taxRate) ? (obj.taxRate * 100).toFixed(2).replace(/\.00$/, "") : "";
+      $("daPct").value = isFinite(obj.daPct) ? (obj.daPct * 100).toFixed(2).replace(/\.00$/, "") : "";
+      $("capexPct").value = isFinite(obj.capexPct) ? (obj.capexPct * 100).toFixed(2).replace(/\.00$/, "") : "";
+      $("nwcPct").value = isFinite(obj.nwcPct) ? (obj.nwcPct * 100).toFixed(2).replace(/\.00$/, "") : "";
+      $("wacc").value = isFinite(obj.wacc) ? (obj.wacc * 100).toFixed(2).replace(/\.00$/, "") : "";
+      $("tg").value = isFinite(obj.tg) ? (obj.tg * 100).toFixed(2).replace(/\.00$/, "") : "";
+      $("netDebt").value = isFinite(obj.netDebt) ? obj.netDebt : "";
+      $("shares").value = isFinite(obj.shares) ? obj.shares : "";
+      $("years").value = isFinite(obj.years) ? obj.years : 5;
+    }
+
+    function saveInputs(obj) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(obj));
+      } catch (e) {}
+    }
+
+    function loadInputs() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return null;
+        return JSON.parse(raw);
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function clearSaved() {
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    }
+
+    function renderForecast(rows) {
+      const tbody = $("forecastTable").querySelector("tbody");
+      tbody.innerHTML = "";
+
+      rows.forEach(r => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>Year ${r.year}</td>
+          <td>${fmtMoney(r.rev)}</td>
+          <td>${fmtMoney(r.ebit)}</td>
+          <td>${fmtMoney(r.nopat)}</td>
+          <td>${fmtMoney(r.daVal)}</td>
+          <td>${fmtMoney(r.capexVal)}</td>
+          <td>${fmtMoney(r.nwcVal)}</td>
+          <td><strong>${fmtMoney(r.fcff)}</strong></td>
+          <td>${fmtMoney(r.pv)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function setText(id, text) {
+      const el = $(id);
+      if (el) el.textContent = text;
+    }
+
+    function updateSensitivity(baseInputs) {
+      const baseW = baseInputs.wacc;
+      const baseG = baseInputs.tg;
+
+      if (!isFinite(baseW) || !isFinite(baseG)) return;
+
+      // 3x3 around base: -1%, base, +1%
+      const wList = [baseW - 0.01, baseW, baseW + 0.01].map(v => Math.max(0.0001, v));
+      const gList = [baseG - 0.01, baseG, baseG + 0.01];
+
+      setText("g0", fmtPct(gList[0]));
+      setText("g1", fmtPct(gList[1]));
+      setText("g2", fmtPct(gList[2]));
+
+      setText("w0", fmtPct(wList[0]));
+      setText("w1", fmtPct(wList[1]));
+      setText("w2", fmtPct(wList[2]));
+
+      const ids = [
+        ["s00","s01","s02"],
+        ["s10","s11","s12"],
+        ["s20","s21","s22"],
+      ];
+
+      for (let i=0;i<3;i++){
+        for (let j=0;j<3;j++){
+          const test = { ...baseInputs, wacc: wList[i], tg: gList[j] };
+          const res = computeDCF(test);
+          const cellId = ids[i][j];
+          if (!res.ok) {
+            setText(cellId, "—");
+          } else {
+            setText(cellId, fmtNum(res.price));
+          }
+        }
+      }
+    }
+
+    function recalc() {
+      const inputs = readInputs();
+      saveInputs(inputs);
+
+      const res = computeDCF(inputs);
+      if (!res.ok) {
+        showWarning(res.error);
+        setText("outPrice", "—");
+        setText("outEquity", "—");
+        setText("outEV", "—");
+        setText("assumptionLine", "—");
+
+        const tbody = $("forecastTable").querySelector("tbody");
+        tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; color: rgba(255,255,255,0.70);">Enter valid inputs to calculate.</td></tr>`;
+
+        // Sensitivity headers still update (optional)
+        updateSensitivity(inputs);
+        return;
+      }
+
+      showWarning("");
+
+      setText("outPrice", fmtNum(res.price));
+      setText("outEquity", fmtMoney(res.equity));
+      setText("outEV", fmtMoney(res.ev));
+
+      setText(
+        "assumptionLine",
+        `Assumptions: Growth ${fmtPct(inputs.growth)}, EBIT margin ${fmtPct(inputs.ebitMargin)}, Tax ${fmtPct(inputs.taxRate)}, WACC ${fmtPct(inputs.wacc)}, g ${fmtPct(inputs.tg)} • Forecast ${res.years}Y`
+      );
+
+      renderForecast(res.rows);
+      updateSensitivity(inputs);
+    }
+
+    // ===== Buttons =====
+    const samplePreset = {
+      // Not company-specific — just a clean sample that produces sane outputs
+      rev0: 1000000000,      // 1.0B
+      growth: 0.08,          // 8%
+      ebitMargin: 0.18,      // 18%
+      taxRate: 0.25,         // 25%
+      daPct: 0.03,           // 3%
+      capexPct: 0.04,        // 4%
+      nwcPct: 0.01,          // 1%
+      wacc: 0.09,            // 9%
+      tg: 0.03,              // 3%
+      netDebt: 2000000000,   // 2.0B
+      shares: 1600000000,    // 1.6B
+      years: 5
+    };
+
+    const blankPreset = {
+      rev0: "", growth: "", ebitMargin: "", taxRate: "", daPct: "", capexPct: "",
+      nwcPct: "", wacc: "", tg: "", netDebt: "", shares: "", years: 5
+    };
+
+    $("btnSample").addEventListener("click", (e) => {
+      e.preventDefault();
+      writeInputs(samplePreset);
+      recalc();
+    });
+
+    $("btnReset").addEventListener("click", (e) => {
+      e.preventDefault();
+      // reset to sample as a friendly default, not empty
+      writeInputs(samplePreset);
+      recalc();
+    });
+
+    $("btnClear").addEventListener("click", (e) => {
+      e.preventDefault();
+      clearSaved();
+      writeInputs(blankPreset);
+      recalc();
+    });
+
+    // ===== Init =====
+    // Always start at top on load (matches your index behavior)
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
+    }
+    window.scrollTo(0, 0);
+
+    // Load saved inputs if available
+    const saved = loadInputs();
+    if (saved) {
+      // Saved values are already normalized in decimals for pct fields
+      writeInputs(saved);
+    } else {
+      // Optional: start with sample so it looks alive immediately
+      writeInputs(samplePreset);
+    }
+
+    // Attach listeners
+    inputIds.forEach(id => {
+      const el = $(id);
+      if (!el) return;
+      el.addEventListener("input", recalc);
+      el.addEventListener("change", recalc);
+    });
+
+    // Footer year
+    $("year").textContent = new Date().getFullYear();
+
+    // First run
+    recalc();
+  </script>
+</body>
+</html>
