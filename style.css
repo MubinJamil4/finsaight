@@ -498,6 +498,18 @@ a{ color: inherit; }
   font-size: 18px;
   color: rgba(255,255,255,0.86);
 }
+/* ===== Home hero font upgrade (writing only) ===== */
+body.home .hero-subtitle,
+body.home .hero-subtitle .muted {
+  font-family: "Manrope", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  letter-spacing: 0.1px;
+}
+body.home .kicker {
+  font-family: "Manrope", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+body.home .badges {
+  margin-top: 10px;
+}
 /* ===== Home overrides (make hero readable + cinematic gradient) ===== */
 body.home .topbar{ display:none; } /* hide old topbar if any pages still include it */
 
