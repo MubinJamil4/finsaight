@@ -1,19 +1,23 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mubin Jamil — Finance & Consulting</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Font for “writing” -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body class="home">
 
   <!-- Minimal nav (top right only) -->
-  <nav class="nav-min">
+  <nav class="nav-min" aria-label="Primary">
     <a href="index.html" class="active">Home</a>
     <a href="about.html">About</a>
     <a href="projects.html">Projects</a>
@@ -21,10 +25,10 @@
     <a href="#" data-scroll="contact">Contact</a>
   </nav>
 
-  <!-- HERO (this is the first page) -->
+  <!-- HERO -->
   <header class="hero hero-editorial">
-    <div class="hero-bg hero-bg-cinematic"></div>
-    <div class="hero-noise"></div>
+    <div class="hero-bg hero-bg-cinematic" aria-hidden="true"></div>
+    <div class="hero-noise" aria-hidden="true"></div>
 
     <div class="wrap hero-editorial-inner">
       <p class="kicker">Finance • Consulting</p>
@@ -38,7 +42,8 @@
           Valuation models, dashboards, and research-grade analysis — designed for clarity, speed, and real-world use.
         </span>
       </p>
-      <div class="badges">
+
+      <div class="badges" aria-label="Key areas">
         <span class="badge">DCF Valuation</span>
         <span class="badge">Market Research</span>
         <span class="badge">Data Intelligence</span>
@@ -62,6 +67,7 @@
               <h3>DCF Valuation Tool</h3>
               <p class="muted">Interactive intrinsic value model. Future: upload filings and auto-fill inputs.</p>
             </div>
+
             <div class="mini-item">
               <h3>AI Industry Correlation Tracker</h3>
               <p class="muted">Track AI-impact sectors with charts, correlations, and narrative insights.</p>
@@ -106,19 +112,11 @@
           </div>
 
           <div class="contact-actions">
-            <a
-              class="btn primary"
-              href="mailto:mubinjamil4@gmail.com?subject=Collaboration%20Inquiry"
-            >
+            <a class="btn primary" href="mailto:mubinjamil4@gmail.com?subject=Collaboration%20Inquiry">
               Email Me
             </a>
 
-            <a
-              class="btn ghost"
-              href="https://www.linkedin.com/in/mubinjamil/"
-              target="_blank"
-              rel="noopener"
-            >
+            <a class="btn ghost" href="https://www.linkedin.com/in/mubinjamil/" target="_blank" rel="noopener">
               LinkedIn
             </a>
           </div>
