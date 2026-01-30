@@ -587,4 +587,8 @@ body.home .topbar{ display:none; } /* hide old topbar if any pages still include
   .nav-min{ right: 10px; left: 10px; justify-content: center; }
   .hero-editorial{ padding-top: 120px; }
 }
+html {
+  scroll-behavior: smooth;
+}
+
 
