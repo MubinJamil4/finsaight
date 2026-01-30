@@ -590,5 +590,20 @@ body.home .topbar{ display:none; } /* hide old topbar if any pages still include
 html {
   scroll-behavior: smooth;
 }
+/* ===== Home hero: move content left ===== */
+body.home .hero-editorial {
+  place-items: start;
+}
 
+body.home .hero-editorial .wrap {
+  margin-left: 0;     /* stop centering the wrap */
+  margin-right: auto; /* keep it left */
+}
+
+body.home .hero-editorial-inner {
+  margin-left: 6vw;   /* controls how far from the left edge */
+  margin-right: auto;
+  text-align: left;
+  max-width: 760px;   /* slightly tighter, feels more “editorial” */
+}
 
